@@ -1,0 +1,54 @@
+---
+interface Props {
+	data: [
+        {
+            id: string;
+            title: string;
+            width?: number;
+            height?: number;
+            borderRadius?: number;
+            customSize?: true;
+        }
+    ];
+}
+
+const { data } = Astro.props;
+---
+
+<div>
+    {data.map(entry => {
+        const style: astroHTML.JSX.CSSProperties = {};
+        const imgStyle: astroHTML.JSX.CSSProperties = {};
+        if (entry.height !== undefined) {
+            const marginY = (120 - entry.height) / 2 + 10;
+            style.margin = `${marginY}px 10px`;
+        }
+        if (entry.borderRadius !== undefined) {
+            style.overflow = 'hidden';
+            style.borderRadius = `${entry.borderRadius}px`;
+        }
+        if (entry.customSize) {
+            imgStyle.width = `${entry.width}px`;
+            imgStyle.height = `${entry.height}px`;
+        }
+        return <a href={`/oekaki_id/${entry.id}`} style={style}>
+            <img src={`/oekaki_thumb/${entry.id}.png`} alt={entry.title} title={entry.title} style={imgStyle} />
+        </a>
+    }
+    )}
+</div>
+<div class="clear"></div>
+<style>
+a {
+    display: block;
+    margin: 10px;
+    box-shadow: 5px 5px 10px 0 darkgray;
+    float: left;
+}
+img {
+    vertical-align: middle;
+}
+.clear {
+    clear: both;
+}
+</style>

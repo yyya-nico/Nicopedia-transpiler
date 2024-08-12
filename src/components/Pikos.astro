@@ -1,0 +1,74 @@
+---
+interface Props {
+	data: [
+        {
+            id: string;
+            title: string;
+            osusumePiko?: true;
+        }
+    ];
+}
+
+import PikosVolume from './Pikos.Volume.astro';
+
+const { data } = Astro.props;
+---
+
+<div>
+    {data.map(entry => 
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    {entry.osusumePiko && <span class="mark">●</span>}<a href={`/mml_id/${entry.id}`}>{entry.title}</a>
+                </td>
+                <td class="piko-cell">
+                    <div class="piko-outer">
+                        <div class="piko-inner">
+                            <img class="pikoplayer" src="/img/pikoplayer.png" alt={entry.id} />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    )}
+</div>
+<PikosVolume />
+<style lang="scss">
+table {
+    width: 100%;
+    max-width: 350px;
+    height: 35px;
+    margin: 2px auto;
+}
+tr {
+    border-bottom: 3px solid #004900;
+    color: white;
+    background-color: green;
+}
+td {
+    border: 0;
+}
+:global(.mark) {
+    color: gold;
+}
+.piko-cell {
+    width: 25px;
+    background-color: lightgreen;
+}
+.piko-outer {
+    overflow: hidden;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border-radius: 3px;
+}
+.piko-inner {
+    margin-top: -1px;
+    margin-left: -1px;
+}
+.pikoplayer {
+    max-width: 86px;
+}
+</style>

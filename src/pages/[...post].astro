@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Simple.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('posts');
+    return posts.map(post => ({
+        params: { post: post.data.urlSnippet }, props: { post }
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title}>
+    <h1>{post.data.title}</h1>
+    <h2>ニコニコ大百科のリンク集</h2>
+    <ul>
+        <li><a href={`https://dic.nicovideo.jp/${post.data.urlSnippet}`} target="_blank">記事</a></li>
+        <li><a href={`https://dic.nicovideo.jp/p/${post.data.urlSnippet}`} target="_blank">記事更新</a></li>
+    </ul>
+    <h2>raw</h2>
+    <p>
+        <a href={`/${post.data.urlSnippet}/raw`}>rawで閲覧</a>
+    </p>
+    <article>
+        <Content />
+    </article>
+    <button>HTMLをコピー</button>
+    <details>
+        <summary>生のHTML</summary>
+        <div>
+            <output>
+                <pre>
+                    <code></code>
+                </pre>
+            </output>
+        </div>
+    </details>
+</Layout>
+<script>
+const article = document.querySelector('article');
+const outputCode = document.querySelector('output code');
+const copyBtn = document.querySelector('button');
+
+if (outputCode) {
+    outputCode.textContent = article?.innerHTML || '';
+}
+
+copyBtn?.addEventListener('click', () => {
+        const textCache = copyBtn.textContent;
+        copyBtn.disabled = true;
+        navigator.clipboard.writeText(article?.innerHTML || '')
+        .then(() => {
+            copyBtn.disabled = true;
+            copyBtn.textContent = 'コピーしました';
+            setTimeout(() => {
+                copyBtn.textContent = textCache;
+                copyBtn.disabled = false;
+            }, 1500);
+        })
+        .catch(e => alert('コピーできませんでした\n' + e));
+    });
+</script>

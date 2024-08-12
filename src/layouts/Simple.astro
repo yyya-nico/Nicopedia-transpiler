@@ -1,0 +1,50 @@
+---
+interface Props {
+	title?: string;
+	frontmatter?: {
+        title?: string;
+    };
+}
+
+const { title, frontmatter } = Astro.props;
+
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<title>{title || frontmatter?.title}</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta name="generator" content={Astro.generator} />
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style lang="scss">
+body{
+    max-width: 800px;
+    margin:10px auto;
+    padding: 0 10px;
+}
+</style>
+<style is:global lang="scss">
+body {
+    p {
+        img,
+        video{
+            display:block;
+            max-width: 100%;
+            margin-inline: auto;
+        }
+    }
+}
+a{
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+}
+</style>

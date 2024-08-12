@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Simple.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+---
+
+<Layout title="下書き一覧">
+    <h1>下書き一覧</h1>
+    <ul>
+        {posts.map(post =>
+            <li><a href={`/${post.data.urlSnippet}`}>{post.data.title}</a></li>
+        )}
+    </ul>
+</Layout>
