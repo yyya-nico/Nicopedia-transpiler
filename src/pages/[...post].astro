@@ -32,9 +32,7 @@ const { Content } = await post.render();
         <summary>生のHTML</summary>
         <div>
             <output>
-                <pre>
-                    <code></code>
-                </pre>
+                <pre><code></code></pre>
             </output>
         </div>
     </details>
@@ -45,7 +43,7 @@ const outputCode = document.querySelector('output code');
 const copyBtn = document.querySelector('button');
 
 if (outputCode) {
-    outputCode.textContent = article?.innerHTML || '';
+    outputCode.textContent = article?.innerHTML.trim() || '';
 }
 
 copyBtn?.addEventListener('click', () => {
