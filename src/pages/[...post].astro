@@ -49,7 +49,7 @@ if (outputCode) {
 copyBtn?.addEventListener('click', () => {
         const textCache = copyBtn.textContent;
         copyBtn.disabled = true;
-        navigator.clipboard.writeText(article?.innerHTML || '')
+        navigator.clipboard.writeText(outputCode?.textContent || '')
         .then(() => {
             copyBtn.disabled = true;
             copyBtn.textContent = 'コピーしました';
