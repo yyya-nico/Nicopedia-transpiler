@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Simple.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
     const posts = await getCollection('posts');
@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <Layout title={post.data.title}>
