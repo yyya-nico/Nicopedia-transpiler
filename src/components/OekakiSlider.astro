@@ -12,22 +12,32 @@ interface Props {
 
 const { data, width, height } = Astro.props;
 ---
-<div>
-    <div class="box" style={{ width: `${width}px`, height: `${height}px` }}>
-        {data.map(entry => {
-            return <a href={`/oekaki_id/${entry.id}`} id={entry.id}>
-                <img src={`/oekaki/${entry.id}.png`} alt={entry.title} title={entry.title} />
-            </a>
-        })}
+<div class="wrapper">
+    <div class="box" style={{ width: `${width}px` }}>
+        <div class="box-inner" style={{ width: `${width}px`, height: `${height}px` }}>
+            {data.map(entry => {
+                return <a href={`/oekaki_id/${entry.id}`} id={entry.id}>
+                    <img src={`/oekaki/${entry.id}.png`} alt={entry.title} title={entry.title} />
+                </a>
+            })}
+        </div>
     </div>
-    {data.map(entry => {
-        return <a class="tab" href={`#${entry.id}`}>{entry.title}</a>
-    })}
-    <div class="clear"></div>
+    <div class="tabs" style={{ width: `${width + (10 + 1) * 2}px` }}>
+        {data.map(entry => {
+            return <a class="tab" href={`#${entry.id}`}>{entry.title}</a>
+        })}
+        <div class="clear"></div>
+    </div>
 </div>
 <style>
+.wrapper {
+    overflow: auto;
+}
 .box {
     border: 1px solid #111;
+    padding: 10px;
+}
+.box-inner {
     overflow: hidden;
 }
 .tab {
