@@ -51,8 +51,9 @@ const rawHTML = await fetch(`${location.pathname}/raw`)
     });
 const juicedHTML = juice(rawHTML, { inlinePseudoElements: true });
 const doc = new DOMParser().parseFromString(juicedHTML, 'text/html');
+const html = doc.querySelector('body')?.innerHTML.trim().replace(/<h(\d) id=".*">/g, '<h$1>') || '';
 
-outputCode.textContent = doc.querySelector('body')?.innerHTML.trim() || '';
+outputCode.textContent = html;
 
 copyBtn.addEventListener('click', async () => {
         const textCache = copyBtn.textContent;
