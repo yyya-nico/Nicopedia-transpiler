@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Simple.astro';
 import { getCollection, render } from 'astro:content';
-import ToString from '../components/ToString.astro';
 
 export async function getStaticPaths() {
     const posts = await getCollection('posts');
@@ -33,7 +32,7 @@ const { Content } = await render(post);
         <summary>インライン化済みHTML</summary>
         <div>
             <output>
-                <pre><code><ToString><Content /></ToString></code></pre>
+                <pre><code></code></pre>
             </output>
         </div>
     </details>
@@ -44,7 +43,16 @@ import juice from 'juice';
 const copyBtn = document.querySelector('button')!;
 const outputCode = document.querySelector('output code')!;
 
-outputCode.textContent = juice(outputCode.textContent || '', { inlinePseudoElements: true });
+const rawHTML = await fetch(`${location.href}/raw`)
+    .then(response => response.text())
+    .then(text => new DOMParser().parseFromString(text, "text/html"))
+    .then(doc => doc.querySelector('body')?.innerHTML.trim() || '')
+    .catch(e => {
+        console.error('Failed to fetch raw HTML:', e);
+        return '';
+    });
+
+outputCode.textContent = juice(rawHTML, { inlinePseudoElements: true });
 
 copyBtn.addEventListener('click', async () => {
         const textCache = copyBtn.textContent;
