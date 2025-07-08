@@ -1,0 +1,49 @@
+---
+interface Props {
+	data: [
+        {
+            id: string;
+            title: string;
+        }
+    ];
+    width: number;
+    height: number;
+}
+
+const { data, width, height } = Astro.props;
+---
+<div>
+    {data.map(entry => {
+        return <a class="tab" href={`#${entry.id}`}>{entry.title}</a>
+    })}
+    <div class="box" style={{ width: `${width}px`, height: `${height}px` }}>
+        {data.map(entry => {
+            return <a href={`/oekaki_id/${entry.id}`} id={entry.id}>
+                <img src={`/oekaki_thumb/${entry.id}.png`} alt={entry.title} title={entry.title} />
+            </a>
+        })}
+    </div>
+</div>
+<style>
+.tab {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #fff;
+    border: 1px solid #111;
+    border-bottom: none;
+    margin-right: 5px;
+    text-decoration: none;
+    color: #333;
+}
+.box {
+    margin-top: -1px;
+    border: 1px solid #111;
+    overflow: hidden;
+}
+a {
+    display: block;
+}
+img {
+    vertical-align: middle;
+}
+</style>

@@ -4,6 +4,7 @@ title: 'yyya'
 ---
 import Pikos from '../../components/Pikos.astro'
 import Oekakis from '../../components/Oekakis.astro'
+import OekakiSlider from '../../components/OekakiSlider.astro'
 
 yyyaは、niconico only nicknameである。
 
@@ -445,6 +446,25 @@ export const postedPikos =
         height: 69
     }
 ]}/>
+
+#### 画像比較
+<OekakiSlider data={[
+    {
+        id: "935452",
+        title: "イオン津SC",
+        height: 69
+    },
+    {
+        id: "935487",
+        title: "津サティ(修正1)",
+        height: 69
+    },
+    {
+        id: "935488",
+        title: "津北ジャスコ(修正1)",
+        height: 69
+    }
+]} width={520} height={300}/>
 
 ### ミスがある投稿
 <details>
