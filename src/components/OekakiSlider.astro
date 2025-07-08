@@ -19,7 +19,7 @@ const { data, width, height } = Astro.props;
     <div class="box" style={{ width: `${width}px`, height: `${height}px` }}>
         {data.map(entry => {
             return <a href={`/oekaki_id/${entry.id}`} id={entry.id}>
-                <img src={`/oekaki_thumb/${entry.id}.png`} alt={entry.title} title={entry.title} />
+                <img src={`/oekaki/${entry.id}.png`} alt={entry.title} title={entry.title} />
             </a>
         })}
     </div>
