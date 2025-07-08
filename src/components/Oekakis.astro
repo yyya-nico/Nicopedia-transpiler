@@ -17,8 +17,8 @@ const { data } = Astro.props;
 
 <div>
     {data.map(entry => {
-        const style: astroHTML.JSX.CSSProperties = {};
-        const imgStyle: astroHTML.JSX.CSSProperties = {};
+        const style: astroHTML.JSX.AllCSSProperties = {};
+        const imgStyle: astroHTML.JSX.AllCSSProperties = {};
         if (entry.height !== undefined) {
             const marginY = (120 - entry.height) / 2 + 10;
             style.margin = `${marginY}px 10px`;
