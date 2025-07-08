@@ -15,8 +15,9 @@ const { data, width, height } = Astro.props;
 <div class="wrapper">
     <div class="box" style={{ width: `${width + (10 + 1) * 2}px`, height: `${height + (10 + 1) * 2}px` }}>
         {data.map(entry => {
-            return <div class="oekaki" id={entry.id}>
-                    <a href={`/oekaki_id/${entry.id}`}>
+            return <div>
+                    <a name={entry.id}></a>
+                    <a class="oekaki-link" href={`/oekaki_id/${entry.id}`}>
                     <img src={`/oekaki/${entry.id}.png`} alt={entry.title} title={entry.title} width={width} height={height} />
                 </a>
             </div>
@@ -38,8 +39,8 @@ const { data, width, height } = Astro.props;
     overflow: hidden;
     border: 1px solid #111;
 }
-.oekaki {
-    padding: 10px;
+.oekaki-link {
+    margin: 10px;
 }
 .tab {
     margin-top: -1px;
