@@ -45,14 +45,14 @@ const outputCode = document.querySelector('output code')!;
 
 const rawHTML = await fetch(`${location.href}/raw`)
     .then(response => response.text())
-    .then(text => new DOMParser().parseFromString(text, "text/html"))
-    .then(doc => doc.querySelector('body')?.innerHTML.trim() || '')
     .catch(e => {
         console.error('Failed to fetch raw HTML:', e);
         return '';
     });
+const juicedHTML = juice(rawHTML, { inlinePseudoElements: true });
+const doc = new DOMParser().parseFromString(juicedHTML, 'text/html');
 
-outputCode.textContent = juice(rawHTML, { inlinePseudoElements: true });
+outputCode.textContent = doc.querySelector('body')?.innerHTML.trim() || '';
 
 copyBtn.addEventListener('click', async () => {
         const textCache = copyBtn.textContent;
