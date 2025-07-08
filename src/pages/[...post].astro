@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Simple.astro';
 import { getCollection, render } from 'astro:content';
+import ToString from '../components/ToString.astro';
 
 export async function getStaticPaths() {
     const posts = await getCollection('posts');
@@ -27,29 +28,28 @@ const { Content } = await render(post);
     <article>
         <Content />
     </article>
-    <button>HTMLをコピー</button>
+    <button>インライン化済みHTMLをコピー</button>
     <details>
-        <summary>生のHTML</summary>
+        <summary>インライン化済みHTML</summary>
         <div>
             <output>
-                <pre><code></code></pre>
+                <pre><code><ToString><Content /></ToString></code></pre>
             </output>
         </div>
     </details>
 </Layout>
 <script>
-const article = document.querySelector('article');
-const outputCode = document.querySelector('output code');
-const copyBtn = document.querySelector('button');
+import juice from 'juice';
 
-if (outputCode) {
-    outputCode.textContent = article?.innerHTML.trim() || '';
-}
+const copyBtn = document.querySelector('button')!;
+const outputCode = document.querySelector('output code')!;
 
-copyBtn?.addEventListener('click', () => {
+outputCode.textContent = juice(outputCode.textContent || '', { inlinePseudoElements: true });
+
+copyBtn.addEventListener('click', async () => {
         const textCache = copyBtn.textContent;
         copyBtn.disabled = true;
-        navigator.clipboard.writeText(outputCode?.textContent || '')
+        navigator.clipboard.writeText(outputCode.textContent || '')
         .then(() => {
             copyBtn.disabled = true;
             copyBtn.textContent = 'コピーしました';
