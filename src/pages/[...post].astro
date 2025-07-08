@@ -43,7 +43,7 @@ import juice from 'juice';
 const copyBtn = document.querySelector('button')!;
 const outputCode = document.querySelector('output code')!;
 
-const rawHTML = await fetch(`${location.href}/raw`)
+const rawHTML = await fetch(`${location.pathname}/raw`)
     .then(response => response.text())
     .catch(e => {
         console.error('Failed to fetch raw HTML:', e);
