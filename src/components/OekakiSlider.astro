@@ -13,10 +13,6 @@ interface Props {
 const { data, width, height } = Astro.props;
 ---
 <div>
-    {data.map(entry => {
-        return <a class="tab" href={`#${entry.id}`}>{entry.title}</a>
-    })}
-    <div class="clear"></div>
     <div class="box" style={{ width: `${width}px`, height: `${height}px` }}>
         {data.map(entry => {
             return <a href={`/oekaki_id/${entry.id}`} id={entry.id}>
@@ -24,13 +20,22 @@ const { data, width, height } = Astro.props;
             </a>
         })}
     </div>
+    {data.map(entry => {
+        return <a class="tab" href={`#${entry.id}`}>{entry.title}</a>
+    })}
+    <div class="clear"></div>
 </div>
 <style>
+.box {
+    border: 1px solid #111;
+    overflow: hidden;
+}
 .tab {
+    margin-top: -1px;
     padding: 5px 10px;
     background-color: #fff;
     border: 1px solid #111;
-    border-bottom: none;
+    border-top: none;
     margin-right: 5px;
     text-decoration: none;
     color: #333;
@@ -38,11 +43,6 @@ const { data, width, height } = Astro.props;
 }
 .clear {
     clear: both;
-}
-.box {
-    margin-top: -1px;
-    border: 1px solid #111;
-    overflow: hidden;
 }
 a {
     display: block;
