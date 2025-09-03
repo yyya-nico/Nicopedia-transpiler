@@ -22,4 +22,4 @@ npm run build; npm run preview
 ```
 
 ## お知らせ
-Nicopedia-transpilerは当yyya_nicoの制作物であり、株式会社ドワンゴとは関係がありません。株式会社ドワンゴに問い合わせないでください。
+Nicopedia-transpilerは当yyya_nicoの制作物であり、株式会社ドワンゴとは関係がありません。
