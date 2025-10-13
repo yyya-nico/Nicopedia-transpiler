@@ -35,20 +35,25 @@ const { data, width, height } = Astro.props;
     margin: 10px;
     overflow: auto;
 }
+.box,
+.tabs {
+    margin: 10px;
+}
 .box {
     overflow: hidden;
-    border: 1px solid #111;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 0 darkgray;
 }
 .oekaki {
     padding: 10px;
 }
 .tab {
-    margin-top: -1px;
+    margin-right: 8px;
     padding: 5px 10px;
-    background-color: #fff;
-    border: 1px solid #111;
-    border-top: none;
-    margin-right: 5px;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 0 darkgray;
     text-decoration: none;
     color: #333;
     float: left;

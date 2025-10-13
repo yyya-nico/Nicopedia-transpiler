@@ -15,9 +15,9 @@ const { data } = Astro.props;
 ---
 
 <div>
-    {data.map(entry => 
     <table>
         <tbody>
+            {data.map(entry => 
             <tr>
                 <td>
                     {entry.osusumePiko && <span class="mark">●</span>}<a href={`/mml_id/${entry.id}`}>{entry.title}</a>
@@ -30,9 +30,9 @@ const { data } = Astro.props;
                     </div>
                 </td>
             </tr>
+            )}
         </tbody>
     </table>
-    )}
 </div>
 <PikosVolume />
 <style lang="scss">
@@ -41,27 +41,30 @@ table {
     max-width: 350px;
     height: 35px;
     margin: 2px auto;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    color: #111;
+    box-shadow: 0 0 5px 0 darkgray;
 }
-tr {
-    border-bottom: 3px solid #004900;
-    color: white;
-    background-color: green;
+tr + tr {
+    border-top: 1px solid #e6e6e6;
 }
 td {
     border: 0;
+    padding: 5px 10px;
 }
 :global(.mark) {
-    color: gold;
+    margin-right: 2px;
+    color: #f6d538;
 }
 .piko-cell {
     width: 25px;
-    background-color: lightgreen;
 }
 .piko-outer {
     overflow: hidden;
     width: 16px;
     height: 16px;
-    margin: auto;
+    margin: 3px 0 0 auto;
     border-radius: 3px;
 }
 .piko-inner {
